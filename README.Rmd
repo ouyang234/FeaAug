@@ -1,0 +1,57 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# Feature Augmentation (FeaAug)
+<!-- badges: start -->
+<!-- badges: end -->
+This package aims to improve the accuracy of classification models by transfroming the original features into new features that are of better quality. We will updata the package when more methods become available.
+
+In version 0.2.2, this can be accomplished by the function "LMDRT". The function "LMDRT" implements the logarithm marginal density ratios transformation to reach the goal, which greatly improves the detection capability of an SVM-based detection model in NSL-KDD dataset. Other classifiers can also be employed to replace SVM.
+
+## Installation
+
+You can download the package from Github and run the following:
+
+```{r}
+#install.packages('path/FeaAug_0.2.2.tar.gz', repos = NULL, type = 'source')
+```
+
+## Example
+
+This is a simple example which shows you how to apply the function "LMDRT".
+
+```{r example}
+library(e1071)
+library(parallel)
+library(FeaAug)
+intest = subnum(rawdata, k = 10)[[1]]
+test = rawdata[intest,]
+training = rawdata[-intest,]
+data = LMDRT(training, test, 'class', c('normal', 'attack'), T)
+traindata = data$traindata
+testdata = data$testdata
+head(traindata)[,1:6]  # the first six rows and six columns of train dataset
+head(testdata)[,1:6] # the first six rows and six columns of test dataset
+```
+
+##	Main Reference
+
+Wang H , Gu J , Wang S . An effective intrusion detection framework based on SVM with feature augmentation[J]. Knowledge-Based Systems, 2017, 136(Nov.15):130-139. 
+
+##	Authors list
+
+For this version of package (FeaAug_0.2.2), the authors are:
+
+Jie Gu, Yue Zheng Ouyang, and Shan Lu (shan.lu@cufe.edu.cn).
